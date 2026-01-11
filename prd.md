@@ -156,6 +156,8 @@ Sprinter addresses these challenges by consolidating sprint data from multiple s
 
 ## Metrics & Risk Signals
 
+**Note on Edge Cases**: All metric formulas should handle division by zero gracefully. When denominators are zero (e.g., Days Elapsed = 0, Days Remaining = 0, Committed Points = 0, Total PRs = 0), the implementation should return appropriate default values (0, null, or "N/A") or skip the metric calculation until sufficient data is available.
+
 ### Story Point Metrics
 
 Define and track the following metrics based on Jira data:
