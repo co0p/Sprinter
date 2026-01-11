@@ -176,10 +176,12 @@ Define and track the following metrics based on Jira data:
    - Formula: `Remaining Points / Days Remaining`
 
 6. **Scope Churn Ratio**: Percentage of baseline scope that has changed
-   - Formula: `(Added Points + Removed Points) / Committed Points * 100`
+   - Formula: `(|Added Points| + |Removed Points|) / Committed Points * 100`
+   - Note: Uses absolute values to measure total scope change magnitude
 
-7. **Blocked Ratio**: Percentage of points currently blocked
-   - Formula: `Blocked Points / Remaining Points * 100`
+7. **Blocked Ratio**: Percentage of current sprint scope that is blocked
+   - Formula: `Blocked Points / (Committed Points + Added Points - Removed Points) * 100`
+   - Note: Denominator represents total current scope
 
 ### GitHub PR Metrics
 
@@ -198,7 +200,8 @@ Track the following PR flow metrics:
    - Formula: `Median of (PR Merged Timestamp - PR Created Timestamp)` for merged PRs in sprint
 
 5. **Review Queue per Reviewer**: Number of open PRs awaiting review per reviewer
-   - Formula: `Count of open PRs assigned to reviewer and not yet reviewed`
+   - Formula: `Count of open PRs where reviewer is requested and has not submitted a review`
+   - Note: Based on GitHub's review request feature
 
 6. **CI Failing Rate** (if CI monitoring enabled): Percentage of PRs with failing CI checks
    - Formula: `Count of PRs with failing CI / Total PRs * 100`
@@ -216,6 +219,8 @@ Define configurable thresholds with default values:
 | Time to First Review (P90) | < 24 hours | 24 - 48 hours | > 48 hours |
 | Open PR Count | < 5 | 5 - 10 | > 10 |
 | CI Failing Rate | < 10% | 10% - 30% | > 30% |
+
+**Note**: When burn rate is zero (no points completed), use days-based comparison: if days elapsed > 20% of sprint duration with no points done, mark as red.
 
 **Overall Sprint Risk Score**:
 - **Green**: No red signals, ≤ 1 yellow signal
