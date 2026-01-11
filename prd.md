@@ -220,7 +220,7 @@ Define configurable thresholds with default values:
 | Open PR Count | < 5 | 5 - 10 | > 10 |
 | CI Failing Rate | < 10% | 10% - 30% | > 30% |
 
-**Note**: When burn rate is zero (no points completed), use days-based comparison: if days elapsed > 20% of sprint duration with no points done, mark as red.
+**Note**: When burn rate is zero (no points completed), use days-based comparison: if days elapsed exceeds the configured zero burn rate threshold (default: 20% of sprint duration) with no points done, mark as red. This threshold is configurable in the thresholds section.
 
 **Overall Sprint Risk Score**:
 - **Green**: No red signals, ≤ 1 yellow signal
@@ -263,7 +263,7 @@ jira:
   instance_url: "https://your-company.atlassian.net"
   email: "user@company.com"
   api_token: "${JIRA_API_TOKEN}"
-  project_key: "PROJ"
+  project_key: "TEAM"
   board_id: 123
   story_points_field: "customfield_10016"
   status_mapping:
@@ -282,10 +282,10 @@ github:
 sprint:
   name: "Sprint 42"
   timezone: "America/Los_Angeles"
-  # Option 1: Date-based
+  # Option 1: Date-based (use explicit start and end dates)
   start_date: "2026-01-06"
   end_date: "2026-01-20"
-  # Option 2: Duration-based
+  # Option 2: Duration-based (use start date + duration; mutually exclusive with Option 1)
   # start_date: "2026-01-06"
   # duration_days: 14
 
@@ -302,6 +302,7 @@ thresholds:
   pr_count:
     yellow: 5
     red: 10
+  zero_burn_rate_threshold_percent: 20  # Mark as red if no points done after this % of sprint elapsed
 
 dashboard:
   port: 8080
