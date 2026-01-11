@@ -209,7 +209,7 @@ Define configurable thresholds with default values:
 
 | Metric | Green (Low Risk) | Yellow (Medium Risk) | Red (High Risk) |
 |--------|------------------|----------------------|-----------------|
-| Required Rate vs. Burn Rate | Required ≤ Burn Rate × 1.1 | Burn Rate × 1.1 < Required ≤ Burn Rate × 1.5 | Required > Burn Rate × 1.5 |
+| Required Rate vs. Burn Rate | Required ≤ Burn Rate * 1.1 | Burn Rate * 1.1 < Required ≤ Burn Rate * 1.5 | Required > Burn Rate * 1.5 |
 | Scope Churn Ratio | < 10% | 10% - 25% | > 25% |
 | Blocked Ratio | < 10% | 10% - 20% | > 20% |
 | Time to First Review (Median) | < 4 hours | 4 - 24 hours | > 24 hours |
